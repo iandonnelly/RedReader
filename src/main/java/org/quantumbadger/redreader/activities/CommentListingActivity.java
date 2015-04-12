@@ -21,7 +21,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -80,13 +82,21 @@ public class CommentListingActivity extends RefreshableActivity
 		RedditAccountManager.getInstance(this).addUpdateListener(this);
 
 		if(getIntent() != null) {
-
+			//Intent to open comment activity
 			final Intent intent = getIntent();
 
 			final String url = intent.getDataString();
             controller = new CommentListingController(RedditURLParser.parseProbableCommentListing(Uri.parse(url)), this);
 
-			doRefresh(RefreshableFragment.COMMENTS, false);
+			int comment_delay = (1000 * intent.getIntExtra("commentTime", 0));
+			Log.i("CommentActivity", "comment_delay = " + comment_delay);
+			Handler mHandler = new Handler();
+			mHandler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					doRefresh(RefreshableFragment.COMMENTS, false);
+				}
+			}, comment_delay);
 
 		} else {
 			throw new RuntimeException("Nothing to show! (should load from bundle)"); // TODO
