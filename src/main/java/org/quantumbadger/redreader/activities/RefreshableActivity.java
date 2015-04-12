@@ -74,8 +74,6 @@ public abstract class RefreshableActivity extends Activity {
 
 	protected void doRefreshNow(RefreshableFragment which, boolean force) {
 
-		Log.i("RefreshableActivity", "doRefreshNow");
-
 		if(which == RefreshableFragment.RESTART) {
 
 			// http://stackoverflow.com/a/3419987/1526861
