@@ -85,7 +85,7 @@ public abstract class RefreshableActivity extends Activity {
 			startActivity(intent);
 
 		} else {
-			//Calls doRefresh in main activity
+			//Calls doRefresh in postlistingactivity
 			doRefresh(which, force);
 		}
 	}

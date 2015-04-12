@@ -315,7 +315,6 @@ public class MainActivity extends RefreshableActivity
 
 	@Override
 	protected void doRefresh(final RefreshableFragment which, final boolean force) {
-		Log.i("MainActivity", "doRefresh called with force = " + force);
 		if(which == RefreshableFragment.MAIN_RELAYOUT) {
 
 			final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
