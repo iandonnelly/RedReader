@@ -121,7 +121,8 @@ public class MainActivity extends RefreshableActivity
 		final int appVersion = pInfo.versionCode;
 
 		if(!sharedPreferences.contains("firstRunMessageShown")) {
-
+			//Dialouge for not being logged in on first run.
+			/*
 			new AlertDialog.Builder(this)
 					.setTitle(R.string.firstrun_login_title)
 					.setMessage(R.string.firstrun_login_message)
@@ -133,6 +134,7 @@ public class MainActivity extends RefreshableActivity
 							})
 					.setNegativeButton(R.string.firstrun_login_button_later, null)
 					.show();
+			*/
 
 			final SharedPreferences.Editor edit = sharedPreferences.edit();
 			edit.putString("firstRunMessageShown", "true");
