@@ -27,8 +27,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.WindowManager;
+
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+
 import org.holoeverywhere.app.AlertDialog;
 import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
@@ -43,13 +45,23 @@ import org.quantumbadger.redreader.cache.CacheManager;
 import org.quantumbadger.redreader.common.General;
 import org.quantumbadger.redreader.common.LinkHandler;
 import org.quantumbadger.redreader.common.PrefsUtility;
-import org.quantumbadger.redreader.fragments.*;
+import org.quantumbadger.redreader.fragments.AccountListDialog;
+import org.quantumbadger.redreader.fragments.ChangelogDialog;
+import org.quantumbadger.redreader.fragments.CommentListingFragment;
+import org.quantumbadger.redreader.fragments.MainMenuFragment;
+import org.quantumbadger.redreader.fragments.PostListingFragment;
+import org.quantumbadger.redreader.fragments.SessionListDialog;
 import org.quantumbadger.redreader.listingcontrollers.CommentListingController;
 import org.quantumbadger.redreader.listingcontrollers.PostListingController;
 import org.quantumbadger.redreader.reddit.api.RedditSubredditSubscriptionManager;
 import org.quantumbadger.redreader.reddit.prepared.RedditPreparedPost;
 import org.quantumbadger.redreader.reddit.things.RedditSubreddit;
-import org.quantumbadger.redreader.reddit.url.*;
+import org.quantumbadger.redreader.reddit.url.PostCommentListingURL;
+import org.quantumbadger.redreader.reddit.url.PostListingURL;
+import org.quantumbadger.redreader.reddit.url.RedditURLParser;
+import org.quantumbadger.redreader.reddit.url.SubredditPostListURL;
+import org.quantumbadger.redreader.reddit.url.UserPostListingURL;
+import org.quantumbadger.redreader.reddit.url.UserProfileURL;
 import org.quantumbadger.redreader.views.RedditPostView;
 
 import java.util.Set;
@@ -81,7 +93,6 @@ public class MainActivity extends RefreshableActivity
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
-
 		PrefsUtility.applyTheme(this);
 
 		OptionsMenuUtility.fixActionBar(this, getString(R.string.app_name));

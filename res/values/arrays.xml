@@ -288,24 +288,29 @@
     </string-array>
 
     <!-- Constants. Do not change. -->
+    <!-- Changed from 25, 50, 100, to 20, 40, 60, 80, 100-->
     <string-array name="pref_behaviour_postcount_items_return">
-        <item>R25</item>
-        <item>R50</item>
+        <item>R20</item>
+        <item>R40</item>
+        <item>R60</item>
+        <item>R80</item>
         <item>R100</item>
         <item>ALL</item>
     </string-array>
 
     <!-- Constants. Do not change. -->
+    <!-- Changed from 25, 50, 100, to 20, 40, 60, 80, 100 -->
     <string-array name="pref_behaviour_postcount_items">
-        <item>25</item>
-        <item>50</item>
+        <item>20</item>
+        <item>40</item>
+        <item>60</item>
+        <item>80</item>
         <item>100</item>
         <item>@string/pref_behaviour_postcount_items_all</item>
     </string-array>
 
 
     <!-- 2014-04-13 -->
-
     <string-array name="pref_menus_mainmenu_useritems_items">
         <item>@string/mainmenu_profile</item>
         <item>@string/mainmenu_inbox</item>

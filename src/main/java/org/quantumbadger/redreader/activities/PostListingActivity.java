@@ -24,8 +24,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.WindowManager;
+
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+
 import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.app.AlertDialog;
 import org.holoeverywhere.preference.PreferenceManager;
@@ -60,6 +62,13 @@ public class PostListingActivity extends RefreshableActivity
 		SessionChangeListener,
 		RedditSubredditSubscriptionManager.SubredditSubscriptionStateChangeListener {
 
+    // Key to receive the time delay in seconds to have between selecting to view a comment thread
+    // And actually loading that comment thread
+    static final String EXTRA_TIME_DELAY = "EXTRA_TIME_DELAY";
+    // The value of the time to delay between selecting to view a comment thread and
+    // loading it in seconds
+    private int timeDelay = 0;
+
 	private PostListingFragment fragment;
 	private PostListingController controller;
 
@@ -84,6 +93,9 @@ public class PostListingActivity extends RefreshableActivity
 		if(getIntent() != null) {
 
 			final Intent intent = getIntent();
+
+            // Set the time delay value
+            timeDelay = intent.getIntExtra(EXTRA_TIME_DELAY, 0);
 
 			final RedditURLParser.RedditURL url = RedditURLParser.parseProbablePostListing(intent.getData());
 
@@ -178,6 +190,11 @@ public class PostListingActivity extends RefreshableActivity
 	}
 
 	public void onPostCommentsSelected(final RedditPreparedPost post) {
+        // Sleep for the time specified by the user
+        long start_time = System.currentTimeMillis();
+        while (System.currentTimeMillis()-start_time < (timeDelay * 1000) ) {
+        }
+
 		LinkHandler.onLinkClicked(this, PostCommentListingURL.forPostId(post.idAlone).toString(), false);
 	}
 
