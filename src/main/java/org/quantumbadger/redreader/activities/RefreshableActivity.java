@@ -19,6 +19,8 @@ package org.quantumbadger.redreader.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+
 import org.holoeverywhere.app.Activity;
 import org.holoeverywhere.preference.PreferenceManager;
 import org.holoeverywhere.preference.SharedPreferences;
@@ -72,6 +74,8 @@ public abstract class RefreshableActivity extends Activity {
 
 	protected void doRefreshNow(RefreshableFragment which, boolean force) {
 
+		Log.i("RefreshableActivity", "doRefreshNow");
+
 		if(which == RefreshableFragment.RESTART) {
 
 			// http://stackoverflow.com/a/3419987/1526861
@@ -83,6 +87,7 @@ public abstract class RefreshableActivity extends Activity {
 			startActivity(intent);
 
 		} else {
+			//Calls doRefresh in main activity
 			doRefresh(which, force);
 		}
 	}

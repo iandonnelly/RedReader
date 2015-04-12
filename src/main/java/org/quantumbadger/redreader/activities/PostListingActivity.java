@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.WindowManager;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -81,9 +82,13 @@ public class PostListingActivity extends RefreshableActivity
 
 		RedditAccountManager.getInstance(this).addUpdateListener(this);
 
+		//Intent to load a reddit listing, or subreddit
 		if(getIntent() != null) {
 
 			final Intent intent = getIntent();
+
+			final boolean useCache = intent.getBooleanExtra("useCache", false);
+			Log.i("RedReader", "useCache = " + useCache);
 
 			final RedditURLParser.RedditURL url = RedditURLParser.parseProbablePostListing(intent.getData());
 
@@ -91,6 +96,7 @@ public class PostListingActivity extends RefreshableActivity
 				throw new RuntimeException(String.format("'%s' is not a post listing URL!", url.generateJsonUri()));
 			}
 
+			//Call controller to load post (or subreddit)
 			controller = new PostListingController((PostListingURL)url);
 
 			OptionsMenuUtility.fixActionBar(this, url.humanReadableName(this, false));
@@ -98,7 +104,8 @@ public class PostListingActivity extends RefreshableActivity
 			super.onCreate(savedInstanceState);
 
 			setContentView(R.layout.main_single);
-			requestRefresh(RefreshableFragment.POSTS, false);
+			//Refresh from cache (negated useCache because we depend on the force bool)
+			requestRefresh(RefreshableFragment.POSTS, !useCache);
 
 		} else {
 			throw new RuntimeException("Nothing to show! (should load from bundle)"); // TODO

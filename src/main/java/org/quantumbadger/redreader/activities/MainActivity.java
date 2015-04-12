@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import com.actionbarsherlock.view.Menu;
@@ -202,6 +203,7 @@ public class MainActivity extends RefreshableActivity
 
 		switch(type) {
 
+			//When user selects FRONTPAGE call next function with frontpage URL.
 			case FRONTPAGE:
 				onSelected(SubredditPostListURL.getFrontPage());
 				break;
@@ -292,6 +294,7 @@ public class MainActivity extends RefreshableActivity
 			return;
 		}
 
+		//Start activity to view subreddit using Intent.
 		if(twoPane) {
 
 			postListingController = new PostListingController(url);
@@ -312,7 +315,7 @@ public class MainActivity extends RefreshableActivity
 
 	@Override
 	protected void doRefresh(final RefreshableFragment which, final boolean force) {
-
+		Log.i("MainActivity", "doRefresh called with force = " + force);
 		if(which == RefreshableFragment.MAIN_RELAYOUT) {
 
 			final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

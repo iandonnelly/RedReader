@@ -30,6 +30,7 @@ import java.util.List;
 
 public class SubredditPostListURL extends PostListingURL {
 
+	//Get front page URL.
 	public static SubredditPostListURL getFrontPage() {
 		return new SubredditPostListURL(Type.FRONTPAGE, null, PostListingController.Sort.HOT, null, null, null);
 	}

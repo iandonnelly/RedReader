@@ -87,9 +87,11 @@ public class PostListingController {
 		return url.generateJsonUri();
 	}
 
+	//Gets lists of posts.
 	public final PostListingFragment get(final boolean force) {
 		if(force) session = null;
-		return PostListingFragment.newInstance(getUri(), session, force ? CacheRequest.DownloadType.FORCE : CacheRequest.DownloadType.IF_NECESSARY);
+		//if force then download from internet, else use cache
+		return PostListingFragment.newInstance(getUri(), session, force ? CacheRequest.DownloadType.FORCE : CacheRequest.DownloadType.NEVER);
 	}
 
 	public final boolean isSubreddit() {

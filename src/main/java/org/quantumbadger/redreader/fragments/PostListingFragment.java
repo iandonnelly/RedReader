@@ -580,6 +580,7 @@ public class PostListingFragment extends Fragment implements RedditPostView.Post
 						&& postListingURL.pathType() == RedditURLParser.PathType.SubredditPostListingURL
 						&& postListingURL.asSubredditPostListURL().type == SubredditPostListURL.Type.SUBREDDIT);
 
+				//Read posts
 				for(final JsonValue postThingValue : posts) {
 
 					final RedditThing postThing = postThingValue.asObject(RedditThing.class);

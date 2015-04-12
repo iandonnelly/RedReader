@@ -92,7 +92,6 @@ public class RedditURLParser {
 
 		return null;
 	}
-
 	public static RedditURL parseProbableCommentListing(Uri uri) {
 
 		RedditURL matchURL = parse(uri);
@@ -101,6 +100,7 @@ public class RedditURLParser {
 		return new UnknownCommentListURL(uri);
 	}
 
+	//Used to load post listing when clicking post
 	public static RedditURL parseProbablePostListing(Uri uri) {
 
 		RedditURL matchURL = parse(uri);
