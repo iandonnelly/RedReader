@@ -2,19 +2,19 @@
 
 ## Opening the Front Page ##
 
-Log:		
+Log:
 	`START u0 {dat=https://www.reddit.com/hot/.json cmp=org.quantumbadger.redreader/.activities.PostListingActivity}`
 
-Command: 		
+Command:
 	`am start -d https://www.reddit.com/hot/.json -n org.quantumbadger.redreader/.activities.PostListingActivity`
 
 Options:
-	`--ez useCache <boolean>` -- specify whether to load from the cache or network	  
+	`--ez useCache <boolean>` -- specify whether to load from the cache or network
 	`--ei EXTRA_TIME_DELAY <int>` -- specify number of seconds between clicking comments and them loading
 
 ## Opening the Comments ##
 
-Log:		
+Log:
 	`START u0 {dat=https://www.reddit.com/comments/31vclm/.json cmp=org.quantumbadger.redreader/.activities.CommentListingActivity}`
 
 Command:
