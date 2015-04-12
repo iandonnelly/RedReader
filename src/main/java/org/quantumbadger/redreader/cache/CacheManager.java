@@ -99,7 +99,7 @@ public final class CacheManager {
 		params.setParameter(ConnManagerPNames.MAX_TOTAL_CONNECTIONS, 50);
 		params.setParameter(ConnManagerPNames.MAX_CONNECTIONS_PER_ROUTE, new ConnPerRoute() {
 			public int getMaxForRoute(HttpRoute route) {
-				return 25;
+				return 20;
 			}
 		});
 
