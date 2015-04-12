@@ -256,8 +256,9 @@ public final class PrefsUtility {
 		return getBoolean(R.string.pref_behaviour_nsfw_key, false, context, sharedPreferences);
 	}
 
+    // Changed from 25, 50, 100, to 20, 40, 60, 80, 100
 	public static enum PostCount {
-		R25, R50, R100, ALL
+		R20, R40, R60, R80, R100, ALL
 	}
 
 	public static PostCount pref_behaviour_post_count(final Context context, final SharedPreferences sharedPreferences) {

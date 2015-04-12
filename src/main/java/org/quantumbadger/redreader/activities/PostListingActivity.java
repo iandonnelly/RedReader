@@ -61,6 +61,13 @@ public class PostListingActivity extends RefreshableActivity
 		SessionChangeListener,
 		RedditSubredditSubscriptionManager.SubredditSubscriptionStateChangeListener {
 
+    // Key to receive the time delay in seconds to have between selecting to view a comment thread
+    // And actually loading that comment thread
+    static final String EXTRA_TIME_DELAY = "EXTRA_TIME_DELAY";
+    // The value of the time to delay between selecting to view a comment thread and
+    // loading it in seconds
+    private int timeDelay = 0;
+
 	private PostListingFragment fragment;
 	private PostListingController controller;
 
@@ -87,6 +94,9 @@ public class PostListingActivity extends RefreshableActivity
 
 			final Intent intent = getIntent();
 
+			// Set the time delay value
+    			timeDelay = intent.getIntExtra(EXTRA_TIME_DELAY, 0);
+
 			final boolean useCache = intent.getBooleanExtra("useCache", false);
 			Log.i("RedReader", "useCache = " + useCache);
 
@@ -104,8 +114,7 @@ public class PostListingActivity extends RefreshableActivity
 			super.onCreate(savedInstanceState);
 
 			setContentView(R.layout.main_single);
-			//Refresh from cache (negated useCache because we depend on the force bool)
-			requestRefresh(RefreshableFragment.POSTS, !useCache);
+			requestRefresh(RefreshableFragment.POSTS, false);
 
 		} else {
 			throw new RuntimeException("Nothing to show! (should load from bundle)"); // TODO
@@ -185,6 +194,11 @@ public class PostListingActivity extends RefreshableActivity
 	}
 
 	public void onPostCommentsSelected(final RedditPreparedPost post) {
+        // Sleep for the time specified by the user
+        long start_time = System.currentTimeMillis();
+        while (System.currentTimeMillis()-start_time < (timeDelay * 1000) ) {
+        }
+
 		LinkHandler.onLinkClicked(this, PostCommentListingURL.forPostId(post.idAlone).toString(), false);
 	}
 

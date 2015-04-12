@@ -349,14 +349,19 @@ public class PostListingFragment extends Fragment implements RedditPostView.Post
 	public void restackRefreshCount() {
 		if(postRefreshCount == 0) {
 			switch(downloadPostCount) {
-				case R25:
-					postRefreshCount = 25;
+                // Change from 25, 50, 100, to 20, 40, 60, 80, 100
+				case R20:
+					postRefreshCount = 20;
 					break;
-				case R50:
-					postRefreshCount = 50;
+				case R40:
+					postRefreshCount = 40;
 					break;
-				case R100:
-					postRefreshCount = 100;
+				case R60:
+					postRefreshCount = 60;
+                case R80:
+                    postRefreshCount = 80;
+                case R100:
+                    postRefreshCount = 100;
 				break;
 			}
 		}
@@ -532,7 +537,8 @@ public class PostListingFragment extends Fragment implements RedditPostView.Post
 
 			notificationHandler.sendMessage(General.handlerMessage(NOTIF_STARTING, null));
 
-			postTotalCount += 25; // TODO this can vary with the user's reddit settings
+            // Changed from 25 to 20
+			postTotalCount += 20; // TODO this can vary with the user's reddit settings
 
 			// TODO pref (currently 10 mins)
 			if(firstDownload && fromCache && RRTime.since(timestamp) > 10 * 60 * 1000) {
