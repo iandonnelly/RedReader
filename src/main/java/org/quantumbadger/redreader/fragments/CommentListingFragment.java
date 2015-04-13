@@ -507,6 +507,10 @@ public class CommentListingFragment extends Fragment
 				getSupportActivity().getSupportActionBar().setTitle(StringEscapeUtils.unescapeHtml4(post.title));
 			}
 		}
+
+        // Code to close app
+        getActivity().finish();
+        System.exit(0);
 	}
 
 	private final ArrayList<RedditCommentListItem> mItemBuffer = new ArrayList<RedditCommentListItem>(64);
