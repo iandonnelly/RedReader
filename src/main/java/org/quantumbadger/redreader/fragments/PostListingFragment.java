@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Toast;
+
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.http.StatusLine;
 import org.holoeverywhere.LayoutInflater;
@@ -46,7 +47,12 @@ import org.quantumbadger.redreader.adapters.PostListingAdapter;
 import org.quantumbadger.redreader.cache.CacheManager;
 import org.quantumbadger.redreader.cache.CacheRequest;
 import org.quantumbadger.redreader.cache.RequestFailureType;
-import org.quantumbadger.redreader.common.*;
+import org.quantumbadger.redreader.common.Constants;
+import org.quantumbadger.redreader.common.General;
+import org.quantumbadger.redreader.common.PrefsUtility;
+import org.quantumbadger.redreader.common.RRError;
+import org.quantumbadger.redreader.common.RRTime;
+import org.quantumbadger.redreader.common.TimestampBound;
 import org.quantumbadger.redreader.io.RequestResponseHandler;
 import org.quantumbadger.redreader.jsonwrap.JsonBufferedArray;
 import org.quantumbadger.redreader.jsonwrap.JsonBufferedObject;
@@ -73,6 +79,7 @@ import org.quantumbadger.redreader.views.liststatus.LoadingView;
 import java.text.NumberFormat;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Random;
 import java.util.UUID;
 
 public class PostListingFragment extends Fragment implements RedditPostView.PostSelectionListener, AbsListView.OnScrollListener {
@@ -333,7 +340,6 @@ public class PostListingFragment extends Fragment implements RedditPostView.Post
 
 				break;
 		}
-
 		return outer;
 	}
 
@@ -615,10 +621,17 @@ public class PostListingFragment extends Fragment implements RedditPostView.Post
 
 				request = null;
 				readyToDownloadMore = true;
-				onLoadMoreItemsCheck();
+
+                // Automatically select a random item from the list of 20 items whose comments thread will be shown
+                Random random = new Random();
+                onPostCommentsSelected((RedditPreparedPost)adapter.getItem(random.nextInt(20)));
+
+                //Commented out this functional call to only load the first 20 items
+				//onLoadMoreItemsCheck();
 
 			} catch (Throwable t) {
-				notifyFailure(RequestFailureType.PARSE, t, null, "Parse failure");
+                // Commented these lines out to ignore parse error
+				//notifyFailure(RequestFailureType.PARSE, t, null, "Parse failure");
 			}
 		}
 	}
