@@ -10,8 +10,6 @@ else
   exit -1
 fi
 
-adb shell am start -d https://www.reddit.com/hot/.json -n 
-org.quantumbadger.redreader/.activities.PostListingActivity --ez useCache true --ei EXTRA_TIME_DELAY 
-$COMMENT_TIME
+adb shell am start -d https://www.reddit.com/hot/.json -n org.quantumbadger.redreader/.activities.PostListingActivity --ez useCache true --ei EXTRA_TIME_DELAY $COMMENT_TIME
 
 exit 0
