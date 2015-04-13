@@ -18,4 +18,4 @@ Now follow the (RedReader Build Instructions)[BUILD.md] starting at step 9.
 
 ## Running ##
 To run our code which opens to a cached version of the Front Page and then opens the comments for the top article, run the following command:
-`./run.sh`
+`./RedditReaderAnalysis.sh`
