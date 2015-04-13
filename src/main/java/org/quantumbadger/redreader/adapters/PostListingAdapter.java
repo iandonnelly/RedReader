@@ -81,13 +81,11 @@ public final class PostListingAdapter extends BaseAdapter {
 	}
 
 	public int getCount() {
-        // Changed this code to limit item size to 20
-		return (postsToReport.size() > 20) ? 20 : postsToReport.size();
+		return postsToReport.size();
 	}
 
-    // return the appropriate post item
 	public Object getItem(final int i) {
-		return posts.get(i);
+		return null;
 	}
 
 	public long getItemId(final int i) {
@@ -110,6 +108,7 @@ public final class PostListingAdapter extends BaseAdapter {
 	}
 
 	public RedditPostView getView(final int i, View convertView, final ViewGroup viewGroup) {
+
 		if(convertView == null) {
 			convertView = new RedditPostView(viewGroup.getContext(), listViewParent, fragmentParent);
 		}
