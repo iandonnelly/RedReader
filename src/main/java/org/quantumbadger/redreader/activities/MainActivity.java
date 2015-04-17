@@ -23,6 +23,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -68,6 +69,8 @@ import org.quantumbadger.redreader.views.RedditPostView;
 import java.util.Set;
 import java.util.UUID;
 
+import static android.os.StrictMode.*;
+
 public class MainActivity extends RefreshableActivity
 		implements MainMenuSelectionListener,
 		RedditAccountChangeListener,
@@ -94,6 +97,19 @@ public class MainActivity extends RefreshableActivity
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
+		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+			.detectCustomSlowCalls()
+			//.detectDiskWrites()
+			//.detectDiskReads()
+			.detectNetwork()
+			.penaltyLog()
+			.build());
+
+		//Catch intent to close app
+		if (getIntent().getBooleanExtra("EXIT", false)) {
+			finish();
+		}
+
 		PrefsUtility.applyTheme(this);
 
 		OptionsMenuUtility.fixActionBar(this, getString(R.string.app_name));

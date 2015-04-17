@@ -49,6 +49,7 @@ import org.quantumbadger.redreader.account.RedditAccountManager;
 import org.quantumbadger.redreader.activities.BugReportActivity;
 import org.quantumbadger.redreader.activities.CommentEditActivity;
 import org.quantumbadger.redreader.activities.CommentReplyActivity;
+import org.quantumbadger.redreader.activities.MainActivity;
 import org.quantumbadger.redreader.activities.MoreCommentsListingActivity;
 import org.quantumbadger.redreader.adapters.CommentListingAdapter;
 import org.quantumbadger.redreader.adapters.HeaderAdapter;
@@ -509,8 +510,10 @@ public class CommentListingFragment extends Fragment
 		}
 
         // Code to close app
-        getActivity().finish();
-		android.os.Process.killProcess(android.os.Process.myPid());
+		Intent intent = new Intent(getSupportApplication(), MainActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra("EXIT", true);
+		startActivity(intent);
 	}
 
 	private final ArrayList<RedditCommentListItem> mItemBuffer = new ArrayList<RedditCommentListItem>(64);

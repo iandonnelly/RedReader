@@ -95,7 +95,7 @@ public class PostListingActivity extends RefreshableActivity
 			final Intent intent = getIntent();
 
 			// Set the time delay value
-    			timeDelay = intent.getIntExtra(EXTRA_TIME_DELAY, 0);
+			timeDelay = intent.getIntExtra(EXTRA_TIME_DELAY, 0);
 
 			final boolean useCache = intent.getBooleanExtra("useCache", false);
 			Log.i("RedReader", "useCache = " + useCache);
@@ -114,7 +114,7 @@ public class PostListingActivity extends RefreshableActivity
 			super.onCreate(savedInstanceState);
 
 			setContentView(R.layout.main_single);
-			requestRefresh(RefreshableFragment.POSTS, false);
+			requestRefresh(RefreshableFragment.POSTS, !useCache);
 
 		} else {
 			throw new RuntimeException("Nothing to show! (should load from bundle)"); // TODO
