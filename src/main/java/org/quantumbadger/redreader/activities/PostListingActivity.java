@@ -93,7 +93,12 @@ public class PostListingActivity extends RefreshableActivity
 		//Intent to load a reddit listing, or subreddit
 		if(getIntent() != null) {
 
+			//Capture start Time
 			((RedReader) this.getApplication()).startTime(System.currentTimeMillis());
+
+			//Use the Fast Provider
+			System.setProperty("org.joda.time.DateTimeZone.Provider",
+					"org.quantumbadger.redreader.FastDateTimeZoneProvider");
 
 			final Intent intent = getIntent();
 

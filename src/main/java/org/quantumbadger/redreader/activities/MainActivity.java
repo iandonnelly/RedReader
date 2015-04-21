@@ -99,12 +99,12 @@ public class MainActivity extends RefreshableActivity
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-			.detectCustomSlowCalls()
-			//.detectDiskWrites()
-			//.detectDiskReads()
-			.detectNetwork()
-			.penaltyLog()
-			.build());
+				.detectCustomSlowCalls()
+						//.detectDiskWrites()
+						//.detectDiskReads()
+				.detectNetwork()
+				.penaltyLog()
+				.build());
 
 		//Catch intent to close app
 		if (getIntent().getBooleanExtra("EXIT", false)) {
