@@ -96,17 +96,24 @@ public class PostListingActivity extends RefreshableActivity
 			//Capture start Time
 			((RedReader) this.getApplication()).startTime(System.currentTimeMillis());
 
-			//Use the Fast Provider
-			System.setProperty("org.joda.time.DateTimeZone.Provider",
-					"org.quantumbadger.redreader.FastDateTimeZoneProvider");
-
 			final Intent intent = getIntent();
+
+			//USE_CACHE extra
+			final boolean useCache = intent.getBooleanExtra("USE_CACHE", false);
+			Log.i("RedReader", "USE_CACHE = " + useCache);
+
+			//USER_FAST_TIME extra
+			final boolean useFastTime = intent.getBooleanExtra("USE_FAST_TIME", false);
+			Log.i("RedReader", "USE_FAST_TIME = " + useFastTime);
 
 			// Set the time delay value
 			timeDelay = intent.getIntExtra(EXTRA_TIME_DELAY, 0);
+			Log.i("RedReader", "COMMENT_TIME = " + timeDelay);
 
-			final boolean useCache = intent.getBooleanExtra("useCache", false);
-			Log.i("RedReader", "useCache = " + useCache);
+			if(useFastTime){
+				//Use the Fast Provider
+				System.setProperty("org.joda.time.DateTimeZone.Provider", "org.quantumbadger.redreader.FastDateTimeZoneProvider");
+			}
 
 			final RedditURLParser.RedditURL url = RedditURLParser.parseProbablePostListing(intent.getData());
 
