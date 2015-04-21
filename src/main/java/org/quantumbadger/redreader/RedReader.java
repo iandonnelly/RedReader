@@ -34,6 +34,16 @@ import java.util.UUID;
 
 public class RedReader extends Application {
 
+	long time_elapsed = 0;
+
+	public void startTime(long time){
+		this.time_elapsed = time;
+	}
+
+	public long getTime(){
+		return time_elapsed;
+	}
+
 	@Override
 	public void onCreate() {
 

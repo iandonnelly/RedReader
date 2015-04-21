@@ -39,6 +39,7 @@ import org.holoeverywhere.preference.SharedPreferences;
 import org.holoeverywhere.widget.EditText;
 import org.holoeverywhere.widget.LinearLayout;
 import org.quantumbadger.redreader.R;
+import org.quantumbadger.redreader.RedReader;
 import org.quantumbadger.redreader.account.RedditAccount;
 import org.quantumbadger.redreader.account.RedditAccountChangeListener;
 import org.quantumbadger.redreader.account.RedditAccountManager;
@@ -107,6 +108,7 @@ public class MainActivity extends RefreshableActivity
 
 		//Catch intent to close app
 		if (getIntent().getBooleanExtra("EXIT", false)) {
+			Log.i("RedReader", "Running Time: " + (System.currentTimeMillis() - ((RedReader) this.getApplication()).getTime()) + "ms");
 			finish();
 		}
 
