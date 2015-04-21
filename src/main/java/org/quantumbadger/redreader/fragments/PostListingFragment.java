@@ -69,7 +69,6 @@ import org.quantumbadger.redreader.reddit.things.RedditThing;
 import org.quantumbadger.redreader.reddit.url.PostListingURL;
 import org.quantumbadger.redreader.reddit.url.RedditURLParser;
 import org.quantumbadger.redreader.reddit.url.SubredditPostListURL;
-import org.quantumbadger.redreader.views.CachedHeaderView;
 import org.quantumbadger.redreader.views.PostListingHeader;
 import org.quantumbadger.redreader.views.RedditPostView;
 import org.quantumbadger.redreader.views.list.ListOverlayView;
@@ -79,7 +78,6 @@ import org.quantumbadger.redreader.views.liststatus.LoadingView;
 import java.text.NumberFormat;
 import java.util.HashSet;
 import java.util.Locale;
-import java.util.Random;
 import java.util.UUID;
 
 public class PostListingFragment extends Fragment implements RedditPostView.PostSelectionListener, AbsListView.OnScrollListener {
@@ -142,6 +140,7 @@ public class PostListingFragment extends Fragment implements RedditPostView.Post
 					break;
 
 				case NOTIF_AGE: {
+                    /*
 					final CachedHeaderView cacheNotif = new CachedHeaderView(
 							context,
 							context.getString(R.string.listing_cached) + " " + RRTime.formatDateTime((Long) msg.obj, context),
@@ -151,6 +150,7 @@ public class PostListingFragment extends Fragment implements RedditPostView.Post
 					listHeaderNotifications.addView(cacheNotif);
 					listHeaderNotifications.requestLayout();
 					adapter.notifyDataSetChanged();
+					*/
 					break;
 				}
 
@@ -355,17 +355,14 @@ public class PostListingFragment extends Fragment implements RedditPostView.Post
 	public void restackRefreshCount() {
 		if(postRefreshCount == 0) {
 			switch(downloadPostCount) {
-                // Change from 25, 50, 100, to 20, 40, 60, 80, 100
-				case R20:
-					postRefreshCount = 20;
+				case R25:
+					postRefreshCount = 25;
 					break;
-				case R40:
-					postRefreshCount = 40;
+				case R50:
+					postRefreshCount = 50;
 					break;
-				case R60:
-					postRefreshCount = 60;
-                case R80:
-                    postRefreshCount = 80;
+				case R75:
+					postRefreshCount = 75;
                 case R100:
                     postRefreshCount = 100;
 				break;
@@ -543,8 +540,7 @@ public class PostListingFragment extends Fragment implements RedditPostView.Post
 
 			notificationHandler.sendMessage(General.handlerMessage(NOTIF_STARTING, null));
 
-            // Changed from 25 to 20
-			postTotalCount += 20; // TODO this can vary with the user's reddit settings
+			postTotalCount += 25; // TODO this can vary with the user's reddit settings
 
 			// TODO pref (currently 10 mins)
 			if(firstDownload && fromCache && RRTime.since(timestamp) > 10 * 60 * 1000) {
@@ -620,14 +616,13 @@ public class PostListingFragment extends Fragment implements RedditPostView.Post
 				notificationHandler.sendMessage(General.handlerMessage(NOTIF_DOWNLOAD_DONE, null));
 
 				request = null;
-				readyToDownloadMore = true;
+                // Changed to false to prevent more items from being loaded
+				readyToDownloadMore = false;
 
-                // Automatically select a random item from the list of 20 items whose comments thread will be shown
-                Random random = new Random();
-                onPostCommentsSelected((RedditPreparedPost)adapter.getItem(random.nextInt(20)));
+                // Automatically select the first item from the list of 20 items whose comments thread will be shown
+                onPostCommentsSelected((RedditPreparedPost)adapter.getItem(0));
 
-                //Commented out this functional call to only load the first 20 items
-				//onLoadMoreItemsCheck();
+				onLoadMoreItemsCheck();
 
 			} catch (Throwable t) {
                 // Commented these lines out to ignore parse error

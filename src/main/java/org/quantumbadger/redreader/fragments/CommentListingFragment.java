@@ -29,11 +29,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
+
 import com.actionbarsherlock.view.ContextMenu;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.laurencedawson.activetextview.ActiveTextView;
+
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.holoeverywhere.LayoutInflater;
 import org.holoeverywhere.app.AlertDialog;
@@ -49,12 +51,15 @@ import org.quantumbadger.redreader.account.RedditAccountManager;
 import org.quantumbadger.redreader.activities.BugReportActivity;
 import org.quantumbadger.redreader.activities.CommentEditActivity;
 import org.quantumbadger.redreader.activities.CommentReplyActivity;
-import org.quantumbadger.redreader.activities.MainActivity;
 import org.quantumbadger.redreader.activities.MoreCommentsListingActivity;
 import org.quantumbadger.redreader.adapters.CommentListingAdapter;
 import org.quantumbadger.redreader.adapters.HeaderAdapter;
 import org.quantumbadger.redreader.cache.CacheRequest;
-import org.quantumbadger.redreader.common.*;
+import org.quantumbadger.redreader.common.General;
+import org.quantumbadger.redreader.common.LinkHandler;
+import org.quantumbadger.redreader.common.PrefsUtility;
+import org.quantumbadger.redreader.common.RRError;
+import org.quantumbadger.redreader.common.RRTime;
 import org.quantumbadger.redreader.reddit.CommentListingRequest;
 import org.quantumbadger.redreader.reddit.RedditAPI;
 import org.quantumbadger.redreader.reddit.RedditCommentListItem;
@@ -63,14 +68,23 @@ import org.quantumbadger.redreader.reddit.prepared.RedditPreparedPost;
 import org.quantumbadger.redreader.reddit.url.PostCommentListingURL;
 import org.quantumbadger.redreader.reddit.url.RedditURLParser;
 import org.quantumbadger.redreader.reddit.url.UserProfileURL;
-import org.quantumbadger.redreader.views.*;
+import org.quantumbadger.redreader.views.CachedHeaderView;
+import org.quantumbadger.redreader.views.LoadMoreCommentsView;
+import org.quantumbadger.redreader.views.RedditCommentView;
+import org.quantumbadger.redreader.views.RedditPostHeaderView;
+import org.quantumbadger.redreader.views.RedditPostView;
 import org.quantumbadger.redreader.views.bezelmenu.BezelSwipeOverlay;
 import org.quantumbadger.redreader.views.bezelmenu.SideToolbarOverlay;
 import org.quantumbadger.redreader.views.liststatus.ErrorView;
 import org.quantumbadger.redreader.views.liststatus.LoadingView;
 import org.quantumbadger.redreader.views.liststatus.SpecificCommentThreadView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 public class CommentListingFragment extends Fragment
 		implements ActiveTextView.OnLinkClickedListener,
@@ -509,11 +523,13 @@ public class CommentListingFragment extends Fragment
 			}
 		}
 
+
+
         // Code to close app
-		Intent intent = new Intent(getSupportApplication(), MainActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		intent.putExtra("EXIT", true);
-		startActivity(intent);
+		//Intent intent = new Intent(getSupportApplication(), MainActivity.class);
+		//intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		//intent.putExtra("EXIT", true);
+		//startActivity(intent);
 	}
 
 	private final ArrayList<RedditCommentListItem> mItemBuffer = new ArrayList<RedditCommentListItem>(64);
