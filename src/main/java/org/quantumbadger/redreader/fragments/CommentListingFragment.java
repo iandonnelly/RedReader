@@ -51,7 +51,6 @@ import org.quantumbadger.redreader.account.RedditAccountManager;
 import org.quantumbadger.redreader.activities.BugReportActivity;
 import org.quantumbadger.redreader.activities.CommentEditActivity;
 import org.quantumbadger.redreader.activities.CommentReplyActivity;
-import org.quantumbadger.redreader.activities.MainActivity;
 import org.quantumbadger.redreader.activities.MoreCommentsListingActivity;
 import org.quantumbadger.redreader.activities.PostListingActivity;
 import org.quantumbadger.redreader.adapters.CommentListingAdapter;
@@ -528,7 +527,7 @@ public class CommentListingFragment extends Fragment
 
 
         // Code to close app
-		Intent intent = new Intent(getSupportApplication(), MainActivity.class);
+		Intent intent = new Intent(getSupportApplication(), PostListingActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.putExtra("EXIT", true);
 		startActivity(intent);
