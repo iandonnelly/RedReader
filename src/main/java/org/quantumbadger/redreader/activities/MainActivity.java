@@ -110,6 +110,8 @@ public class MainActivity extends RefreshableActivity
 		if (getIntent().getBooleanExtra("EXIT", false)) {
 			Log.i("RedReader", "Running Time: " + (System.currentTimeMillis() - ((RedReader) this.getApplication()).getTime()) + "ms");
 			finish();
+			Log.i("RedReader", "Called finish()");
+			System.exit(0);
 		}
 
 		PrefsUtility.applyTheme(this);
