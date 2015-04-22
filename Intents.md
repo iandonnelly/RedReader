@@ -9,7 +9,8 @@ Command:
 	`am start -d https://www.reddit.com/hot/.json -n org.quantumbadger.redreader/.activities.PostListingActivity`
 
 Options:  
-	`--ez USE_CACHE <boolean>` -- specify whether to load from the cache or network
+	`--ez USE_CACHE <boolean>` -- specify whether to load from the 
+cache or network  
   	`--ez USE_FAST_TIME <boolean>` -- specify whether to use jodi 
 provider for timezones or the custom faster provider  
 	`--ei EXTRA_TIME_DELAY <int>` -- specify number of seconds 
