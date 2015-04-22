@@ -19,3 +19,7 @@ Now follow the (RedReader Build Instructions)[BUILD.md] starting at step 9.
 ## Running ##
 To run our code which opens to a cached version of the Front Page and then opens the comments for the top article, run the following command:
 `./RedditReaderAnalysis.sh`
+
+## Cache ##
+The cache for this application is stored `/data/data/org.quantumbadger.redreader`.
+To use our copy of the cache, unzip (cache.zip)[Performance Analysis\cache.zip] and copy the contents into `/data/data/org.quantumbadger.redreader`, note that this will require root access.
