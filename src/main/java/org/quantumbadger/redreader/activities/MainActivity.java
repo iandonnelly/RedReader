@@ -106,14 +106,6 @@ public class MainActivity extends RefreshableActivity
 				.penaltyLog()
 				.build());
 
-		//Catch intent to close app
-		if (getIntent().getBooleanExtra("EXIT", false)) {
-			Log.i("RedReader", "Running Time: " + (System.currentTimeMillis() - ((RedReader) this.getApplication()).getTime()) + "ms");
-			finish();
-			Log.i("RedReader", "Called finish()");
-			System.exit(0);
-		}
-
 		PrefsUtility.applyTheme(this);
 
 		OptionsMenuUtility.fixActionBar(this, getString(R.string.app_name));

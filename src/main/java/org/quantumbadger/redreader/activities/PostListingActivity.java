@@ -68,6 +68,7 @@ public class PostListingActivity extends RefreshableActivity
     // The value of the time to delay between selecting to view a comment thread and
     // loading it in seconds
     private int timeDelay = 0;
+    private boolean isExiting = false;
 
 	private PostListingFragment fragment;
 	private PostListingController controller;
@@ -90,8 +91,17 @@ public class PostListingActivity extends RefreshableActivity
 
 		RedditAccountManager.getInstance(this).addUpdateListener(this);
 
+        //Catch intent to close app
+        isExiting = getIntent().getBooleanExtra("EXIT", false);
+        if (isExiting) {
+            super.onCreate(savedInstanceState);
+            Log.i("RedReader", "Running Time: " + (System.currentTimeMillis() - ((RedReader) this.getApplication()).getTime()) + "ms");
+            finish();
+            Log.i("RedReader", "Called finish()");
+            return;
+        }
 		//Intent to load a reddit listing, or subreddit
-		if(getIntent() != null) {
+		else if(!isExiting && getIntent() != null) {
 
 			//Capture start Time
 			((RedReader) this.getApplication()).startTime(System.currentTimeMillis());
@@ -146,7 +156,9 @@ public class PostListingActivity extends RefreshableActivity
 
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
-
+        if (isExiting) {
+            return true;
+        }
 		final RedditAccount user = RedditAccountManager.getInstance(this).getDefaultAccount();
 		final RedditSubredditSubscriptionManager.SubredditSubscriptionState subredditSubscriptionState;
 		final RedditSubredditSubscriptionManager subredditSubscriptionManager
