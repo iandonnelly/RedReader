@@ -523,14 +523,6 @@ public class CommentListingFragment extends Fragment
 				getSupportActivity().getSupportActionBar().setTitle(StringEscapeUtils.unescapeHtml4(post.title));
 			}
 		}
-
-
-
-        // Code to close app
-		Intent intent = new Intent(getSupportApplication(), PostListingActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		intent.putExtra("EXIT", true);
-		startActivity(intent);
 	}
 
 	private final ArrayList<RedditCommentListItem> mItemBuffer = new ArrayList<RedditCommentListItem>(64);
@@ -558,6 +550,12 @@ public class CommentListingFragment extends Fragment
 				loadingView.setDone(R.string.download_done);
 				listFooter.removeView(loadingView);
 			}
+
+            // Code to close app
+            Intent intent = new Intent(getSupportApplication(), PostListingActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("EXIT", true);
+            startActivity(intent);
 
 		} else {
 			makeNextRequest(getSupportActivity());
