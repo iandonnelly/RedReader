@@ -24,7 +24,7 @@ To run our code which opens to a cached version of the Front Page and then opens
 
 Note: Requires root and 'apps and adb' must be enabled under superuser
 
-## Loading Included Cache ##
+### Loading Included Cache ###
 
 Our cache files are loacted [here](Performance Analysis/cache/).  
 
@@ -46,7 +46,7 @@ Step 2: Move the cache files
     adb push cache/files /sdcard/Android/data/org.quantumbadger.redreader/cache  
 
 
-## Creating Your Own Cache ##
+### Creating Your Own Cache ###
 
 Step 1: Install the app, run the main operation to create the cache.  
 
