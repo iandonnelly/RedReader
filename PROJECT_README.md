@@ -26,7 +26,7 @@ Note: Requires root and 'apps and adb' must be enabled under superuser
 
 ### Loading Included Cache ###
 
-Our cache files are loacted [here](Performance Analysis/cache/).  
+Our cache files are loacted [here](Performance Analysis/cache).  Please run these commands from the parent directory of the cache folder, if you are working from the repo, that will be the [Performance Analysis](Performance Analysis) folder.  
 
 Step 1: Move the database files  
   
