@@ -29,6 +29,7 @@ Note: Requires root and 'apps and adb' must be enabled under superuser
 Our cache files are loacted [here](Performance Analysis/cache/).  
 
 Step 1: Move the database files  
+  
     adb push cache/cache.db /sdcard/cache.db  
     adb push cache/cache.db-journal /sdcard/cache.db-journal  
     
@@ -41,6 +42,7 @@ Step 1: Move the database files
 
 
 Step 2: Move the cache files  
+  
     adb push cache/files /sdcard/Android/data/org.quantumbadger.redreader/cache  
 
 
@@ -49,6 +51,7 @@ Step 2: Move the cache files
 Step 1: Install the app, run the main operation to create the cache.  
 
 Step 2: Get database files  
+  
     adb shell  
     su  
     cp /data/data/org.quantumbadger.redreader/databases/cache.db /sdcard  
@@ -60,6 +63,7 @@ Step 2: Get database files
     adb pull /sdcard/cache.db-journal cache/cache.db-journal  
 
 Step 3:  Get cache files  
+  
     adb pull /sdcard/Android/data/org.quantumbadger.redreader/cache cache/files/  
 
 Then, follow the instructions in 'Loading Included Cache' to load the cache.
